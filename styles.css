@@ -1,0 +1,82 @@
+/* Prompt with rounded corner */
+#prompt {
+  border-radius: 25px;
+  border: 1px solid lightgrey;
+  padding: 20px;
+  width: 584px;
+  height: 17px;
+  margin-left: 25%; }
+
+/* Link color and non-underline when not hovering over it*/
+a:link, a:visited {
+  color: black;
+  text-decoration: none; }
+
+/* Link underlined when hovered*/
+a:hover {
+  text-decoration: underline; }
+
+/* Right align links*/
+a {
+  float: right;
+  margin: 5px; }
+
+/* Styling for links at top*/
+.top_links {
+  font-size: 15px;
+  font-family: arial, sans-serif;
+  text-align: right;
+  padding-top: 25px;
+  padding-bottom: 10px;
+  padding-right: 100px;
+  padding-left: 20px; }
+
+.advanced_header {
+  font-size: 20px;
+  font-family: arial, sans-serif;
+  padding-left: 47px;
+  margin-top: 10px;
+  color: #d93025; }
+
+.advanced_form .form-control {
+  width: 465px; }
+
+.advanced_form {
+  text-align: left;
+  padding-left: 47px;
+  font-family: arial, sans-serif;
+  font-size: arial, sans-serif; }
+
+.row {
+  display: inline-block;
+  padding-top: 10px;
+  padding-bottom: 10px; }
+
+.grey {
+  color: grey; }
+
+.prompt_info {
+  font-family: arial, sans-serif;
+  font-size: 14.4px; }
+
+@media (max-width: 767px) {
+  .top_links {
+    padding-top: 25px;
+    padding-bottom: 20px;
+    padding-right: 25px;
+    padding-left: 20px; }
+
+  #prompt {
+    width: 400px;
+    margin-left: 7.5%; } }
+@media (max-width: 1245px) {
+  .optional {
+    display: none; } }
+@media (max-width: 800px) {
+  .advanced_form .form-control {
+    width: 335px; } }
+@media (max-width: 500px) {
+  .advanced_form .form-control {
+    width: 265px; } }
+
+/*# sourceMappingURL=styles.css.map */

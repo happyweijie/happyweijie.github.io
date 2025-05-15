@@ -4,11 +4,15 @@
     <head>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
         <link href="styles.css" rel="stylesheet">
-        <title>Trivia! Solution</title>
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+        <title>Trivia!</title>
     </head>
     <body>
         <div class="header">
-            <h1>Trivia! Solution</h1>
+            <h1>Trivia!</h1>
         </div>
 
         <div class="container">
@@ -84,13 +88,10 @@
             // Open-ended
             document.querySelector('#submitBtn').addEventListener('click', function() {
                 let input = document.querySelector('#response');
-                if (input.value === 'Hydrogen')
-                {
+                if (input.value.toLowerCase() === 'hydrogen') {
                     input.style.backgroundColor = "green";
                     document.querySelector('#status2').innerHTML = "Correct!";
-                }
-                else
-                {
+                } else {
                     input.style.backgroundColor = "red";
                     document.querySelector('#status2').innerHTML = "Incorrect";
                 }

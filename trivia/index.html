@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia! Solution</title>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia! Solution</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice</h2>
+                <hr>
+                <!-- TODO: Add multiple choice question here -->
+                <!-- Question 1-->
+                <h3>1. For the elements in the third period of the Periodic Table, which property decreases consistently from sodium to chlorine?</h3>
+
+                <button class="wrong">melting point</button>
+                <button class="correct">radius of the atom</button>
+                <button class="wrong">electrical conductivity</button>
+                <button class="wrong">ionisation energy</button>
+
+                <p id="status1">
+
+                <!-- Question 2-->
+                <h3>2. What is the element that has a second ionisation energy lower than that of each of the elements either side of it in the Periodic Table?</h3>
+
+                <button class="wrong">boron</button>
+                <button class="wrong">oxygen</button>
+                <button class="wrong">nitrogen</button>
+                <button class="correct">fluorine</button>
+
+                <p id="status4">
+
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+
+                <!-- TODO: Add free response question here -->
+                <!-- Question 2-->
+                <h3>3. Deuterium and Tritium are isotopes of which element?</h3>
+
+                <input name="q" autocomplete="off" placeholder="answer" type="text" id="response">
+
+                <button id="submitBtn">Check Answer</button>
+
+                <p id="status2">
+            </div>
+        </div>
+        <script>
+            // TODO: Add code to check answers to questions
+            // Verify answer for multiple choice question
+            let x = 0;
+            mcqStatus = ['status1', 'status4'];
+            document.addEventListener('DOMContentLoaded', function() {
+                // Correct Answers
+                let corrects = document.querySelectorAll('.correct');
+                for (let i = 0; i < corrects.length; i++)
+                {
+                    corrects[i].addEventListener('click', function() {
+                        corrects[i].style.backgroundColor = 'green';
+                        document.getElementById(mcqStatus[x]).innerHTML = 'Correct!';
+                        x++;
+                    });
+                }
+
+                // Wrong answers
+                let wrongs = document.querySelectorAll('.wrong');
+                for (let i = 0; i < wrongs.length; i++)
+                {
+                    wrongs[i].addEventListener('click', function() {
+                        wrongs[i].style.backgroundColor = "red";
+                        document.getElementById(mcqStatus[x]).innerHTML = "Incorrect";
+                    });
+                }
+            });
+
+            // Open-ended
+            document.querySelector('#submitBtn').addEventListener('click', function() {
+                let input = document.querySelector('#response');
+                if (input.value === 'Hydrogen')
+                {
+                    input.style.backgroundColor = "green";
+                    document.querySelector('#status2').innerHTML = "Correct!";
+                }
+                else
+                {
+                    input.style.backgroundColor = "red";
+                    document.querySelector('#status2').innerHTML = "Incorrect";
+                }
+            });
+        </script>
+    </body>
+</html>

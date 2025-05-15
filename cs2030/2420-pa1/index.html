@@ -16,7 +16,7 @@
 <div id="outer">
 <div id="inner">
 	<div id="content_full">                         
-		<div class="content-header"><h1>CS2030 (2420) Practical Assessment #1</h3></div>
+		<div class="content-header"><h1>CS2030 (2420) Practical Assessment #1</h1></div>
 		<div class="spacer"></div>
 		<table width="100%" cellpadding="0" cellspacing="0" border="0">
 			<tbody><tr><td valign="top" style="width: 30%;">
@@ -451,97 +451,9 @@ not found
 1: para 5
 </pre>
 
-
-
-<!--
-Include a <tt>stitch</tt> method that takes in a
-(possibly infinite) stream of chapters and
-books, and stitches them together back-to-back so that it can be viewed with the <tt>prev()</tt>, <tt>next()</tt> and
-<tt>show()</tt> methods.
-Note that the <tt>stitch</tt> method also takes in a range of pages to view through the start and end pages.
-Here is a sample run.
-
-<pre>
-jshell&gt; Page pp1 = new Page("This is a paragraph.\nThis, is another paragraph.")
-pp1 ==&gt; page
-
-jshell&gt; Page pp2 = new Page("A page with only one paragraph.")
-pp2 ==&gt; page
-
-jshell&gt; stitch(Stream.of(
-   ...&gt;    new Chapter(Stream.of(new Page("first chapter"))),
-   ...&gt;    new Book(Stream.of(
-   ...&gt;       new Chapter(Stream.of(pp1, pp2)),
-   ...&gt;       new Chapter(Stream.iterate(1, x -&gt; x + 1).map(x -&gt; new Page("para " + x)))))
-   ...&gt; ), 1, 10) // range of pages
-$.. ==&gt; view
-
-jshell&gt; stitch(Stream.of(
-   ...&gt;    new Chapter(Stream.of(new Page("first chapter"))),
-   ...&gt;    new Book(Stream.of(
-   ...&gt;       new Chapter(Stream.of(pp1, pp2)),
-   ...&gt;       new Chapter(Stream.iterate(1, x -&gt; x + 1).map(x -&gt; new Page("para " + x)))))
-   ...&gt; ), 1, 10).
-   ...&gt; show()
-1: first chapter
-
-jshell&gt; stitch(Stream.of(
-   ...&gt;    new Chapter(Stream.of(new Page("first chapter"))),
-   ...&gt;    new Book(Stream.of(
-   ...&gt;       new Chapter(Stream.of(pp1, pp2)),
-   ...&gt;       new Chapter(Stream.iterate(1, x -&gt; x + 1).map(x -&gt; new Page("para " + x)))))
-   ...&gt; ), 1, 10).
-   ...&gt; next().show()
-1: This is a paragraph.
-2: This, is another paragraph.
-
-jshell&gt; stitch(Stream.of(
-   ...&gt;    new Chapter(Stream.of(new Page("first chapter"))),
-   ...&gt;    new Book(Stream.of(
-   ...&gt;       new Chapter(Stream.of(pp1, pp2)),
-   ...&gt;       new Chapter(Stream.iterate(1, x -&gt; x + 1).map(x -&gt; new Page("para " + x)))))
-   ...&gt; ), 1, 10).
-   ...&gt; next().next().next().show()
-1: para 1
-
-jshell&gt; stitch(Stream.of(
-   ...&gt;    new Chapter(Stream.of(new Page("first chapter"))),
-   ...&gt;    new Book(Stream.of(
-   ...&gt;       new Chapter(Stream.of(pp1, pp2)),
-   ...&gt;       new Chapter(Stream.iterate(1, x -&gt; x + 1).map(x -&gt; new Page("para " + x)))))
-   ...&gt; ), 1, 3).
-   ...&gt; next().next().next().show()
-1: A page with only one paragraph.
-
-jshell&gt; stitch(Stream.of(
-   ...&gt;    new Chapter(Stream.of(new Page("first chapter"))),
-   ...&gt;    new Book(Stream.of(
-   ...&gt;       new Chapter(Stream.of(pp1, pp2)),
-   ...&gt;       new Chapter(Stream.iterate(1, x -&gt; x + 1).map(x -&gt; new Page("para " + x)))))
-   ...&gt; ), 2, 4).
-   ...&gt; next().next().next().show()
-1: para 1
-
-jshell&gt; stitch(Stream.of(
-   ...&gt;    new Chapter(Stream.of(new Page("first chapter"))),
-   ...&gt;    new Book(Stream.of(
-   ...&gt;       new Chapter(Stream.of(pp1, pp2)),
-   ...&gt;       new Chapter(Stream.iterate(1, x -&gt; x + 1).map(x -&gt; new Page("para " + x)))))
-   ...&gt; ), 3, 5).
-   ...&gt; next().next().next().show()
-1: para 2
-
-jshell&gt; stitch(Stream.of(
-   ...&gt;    new Chapter(Stream.of(new Page("first chapter"))),
-   ...&gt;    new Book(Stream.of(
-   ...&gt;       new Chapter(Stream.of(pp1, pp2)),
-   ...&gt;       new Chapter(Stream.iterate(1, x -&gt; x + 1).map(x -&gt; new Page("para " + x)))))
-   ...&gt; ), 3, 5).
-   ...&gt; prev().show()
-1: A page with only one paragraph.
-</pre>
-
--->
+<p>
+Walkthrough: <a href="https://drive.google.com/file/d/18H2p1DqNjijYUCGQTkJc0LFOaeCnPJln/view">https://drive.google.com/file/d/18H2p1DqNjijYUCGQTkJc0LFOaeCnPJln/view</a>
+</p>
 		</div></div>                          
 									<input type="hidden" id="tid" name="tid" value="5656">
 		</div>

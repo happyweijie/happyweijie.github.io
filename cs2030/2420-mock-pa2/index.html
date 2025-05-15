@@ -1,0 +1,595 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="-1">
+
+<title>AbstractNum</title>
+<!-- START NUS Includes-->
+<script type="text/javascript" src="./index_files/nussearch.js.download"></script>
+<link rel="stylesheet" type="text/css" href="./index_files/nusbase.css" media="screen, print, projection, handheld">
+<link rel="stylesheet" type="text/css" href="./index_files/nusmenu.css" media="screen, print, projection, handheld">
+<link rel="stylesheet" type="text/css" href="./index_files/nusscreen.css" media="screen, projection, print">
+
+<!-- END NUS Includes -->
+<script type="text/javascript" src="./index_files/ajax.js.download"></script>
+<script type="text/javascript" src="./index_files/jquery-3.6.0.min.js.download"></script>
+<script type="text/javascript" src="./index_files/jquery.tablesorter.min.js.download"></script>
+<script type="text/javascript" src="./index_files/jquery.tablesorter.pager.js.download"></script>
+<!--<script type="text/javascript" src="/js/folding.js"></script>-->
+<script type="text/javascript" src="./index_files/jquery.watermark.min.js.download"></script>
+<script type="text/javascript" src="./index_files/jquery.scrollTo-2.1.3-min.js.download"></script>
+<script type="text/javascript" src="./index_files/customScript.js.download"></script>
+<!--script type="text/javascript">
+            function enterPressButton(field, button) {
+                $(field).keypress(function(e){if(e.which==13)$(button).trigger("click");});
+            }
+</script>-->
+<link rel="stylesheet" href="./index_files/style.css" type="text/css">
+<link rel="stylesheet" href="./index_files/jquery.tablesorter.css" type="text/css">
+<script type="text/javascript" src="./index_files/jquery-3.6.0.min(1).js.download"></script>
+<!--<script type="text/javascript" src="js/folding.js"></script>-->
+<script type="text/javascript" src="./index_files/jquery.rating.js.download"></script>
+<script type="text/javascript" src="./index_files/behaviour.js.download"></script>
+<script type="text/javascript" src="./index_files/textarea_maxlen.js.download"></script>
+<script type="text/javascript" src="./index_files/jquery.timer.js.download"></script>
+
+<script type="text/javascript" src="./index_files/plupload.full.min.js.download"></script>
+
+<link rel="stylesheet" href="./index_files/jquery.rating.css" type="text/css">
+<link rel="stylesheet" href="./index_files/style.css" type="text/css">
+<link rel="stylesheet" href="./index_files/tagcloud.css" type="text/css">
+<link rel="stylesheet" href="./index_files/jquery-ui-1.7.2.custom.css" type="text/css">
+
+<link rel="stylesheet" href="./index_files/jquery.ui.plupload.css" type="text/css">
+
+<link rel="stylesheet" href="chrome-extension://ihcjicgdanjaechkgeegckofjjedodee/app/content-style.css"><link type="text/css" rel="stylesheet" href="chrome-extension://fheoggkfdfchfphceeifdbepaooicaho/css/mcafee_fonts.css"></head>
+
+<body>
+<div id="container">
+<div id="outer">
+<div id="inner">
+	<div id="content_full">                         
+		<div class="content-header"><h3>CS2030 (AY24/25) Mock Practical Assessment #2</h3></div>
+		<div class="spacer"></div>
+		<table width="100%" cellpadding="0" cellspacing="0" border="0">
+			<tbody><tr><td valign="top" style="width: 30%;">
+				<div class="meta_header">Tags &amp; Categories</div>
+				<div id="classifyList"><span class="value">Tags:
+</span>
+<span class="value">Categories:
+</span></div>
+			</td>
+			<td valign="top" style="width: 40%;">
+				<div class="meta_header">Related Tutorials</div>
+				<div id="tutorialList"></div>
+			</td>
+			<td valign="top" style="width: 30%;">
+			</td>
+			</tr>
+		</tbody></table>
+		<div class="content-header">
+			<h3>Task Content
+							</h3>
+		</div>                          
+		<div class="panel"><div class="task-content">
+		<h2>Natural Numbers</h2>
+
+<p>
+Natural numbers are commonly observed in nature, and have been used for counting since time immemorial.
+Natural numbers start with zero, and the successor of a natural number is also a natural number.
+As an example, one (<tt>1</tt>) is the successor of 
+zero (<tt>succ(0)</tt>), 
+two (<tt>2</tt>) is the successor of 
+one (<tt>succ(1)</tt>), etc.
+
+</p><p>Simple operations can be performed on natural numbers.
+In particular, addition can be observed as a repeated successor application.
+For example, adding two to zero is <tt>succ(succ(0))</tt> which gives two (<tt>2</tt>).
+With addition defined, other operations such as subtraction and multiplication can follow.
+
+</p><h2>Task</h2>
+
+<p>In this task, you are to define the common operations of natural numbers, as well as natural fractions, i.e. fractions whose numerator and denominator are natural numbers.
+
+</p><p>You are given the <tt><a href="AbstractNum.java">AbstractNum</a></tt> class shown below.
+
+</p><pre>import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
+class AbstractNum&lt;T&gt; {
+    protected static final Function&lt;Integer, Integer&gt; s = x -&gt; x + 1;
+    protected static final Function&lt;Integer, Integer&gt; n = x -&gt; -x;
+    protected static final Predicate&lt;Integer&gt; valid = x -&gt; x &gt;= 0;
+
+    protected final Optional&lt;T&gt; opt;
+
+    protected AbstractNum(T i) {
+        this(Optional.&lt;T&gt;of(i));
+    }
+
+    protected AbstractNum(Optional&lt;T&gt; opt) {
+        this.opt = opt;
+    }
+
+    static AbstractNum&lt;Integer&gt; zero() {
+        return new AbstractNum&lt;Integer&gt;(0);
+    }
+
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        } else {
+            if (obj instanceof AbstractNum&lt;?&gt; abs) {
+                return abs.opt.equals(this.opt);
+            } else {
+                return false;
+            }
+        }
+    }
+
+    protected boolean isValid() {
+        return this.opt.map(x -&gt; true).orElse(false);
+    }
+
+    public String toString() {
+        return this.opt.map(x -&gt; x.toString()).orElse("NaN");
+    }
+}
+</pre>
+
+<p>Note the definitions of the two functions (<tt>s</tt> and <tt>n</tt>) and predicate <tt>valid</tt>.
+These are the only lambdas that you will need for arithmetic manipulation.
+In your implementation, you are not allowed to use the operators 
+<tt>+</tt>
+<tt>-</tt>
+<tt>*</tt>
+<tt>/</tt>
+<tt>%</tt> (other similar forms e.g. <tt>+=</tt>, <tt>++</tt>, etc.),
+or bitwise operations to perform arithmetic manipulation.
+
+</p><p>There is a single instance property <tt>opt</tt> of type <tt>Optional&lt;T&gt;</tt>.
+This is the only property that you need.
+As such, you are not allowed to define any other instance properties, including constants, in your implementation.
+
+</p><p>The <tt>static</tt> method <tt>zero()</tt> creates a <tt>AbstractNum</tt> with the integer zero.  This is the only "value" that you will need in your implementation.
+As such, you are not allowed to use numerical values in your implementation.
+
+</p><p>The <tt>equals</tt> method is provided.
+Only use this to compare natural numbers and fractions.
+You will not be allowed to use comparison operators 
+<tt>&lt; &gt; == != &lt;= &gt;=</tt>. 
+The predicate <tt>valid</tt> may come in handy.
+
+</p><p>Two other methods <tt>isValid</tt> and <tt>toString</tt> are provided for you.
+You will not need to define any <tt>toString</tt> method in your implementation.
+In addition, there should be no dependency on <tt>String</tt> in your implementation.
+Also note the use of <tt>orElse</tt> in these methods.  
+In your implementation, you are not allowed to use the
+<tt>Optional</tt> methods <tt>isPresent</tt>, <tt>isEmpty</tt>,
+<tt>equals</tt>, or any form of get methods, i.e.
+<tt>get</tt>, <tt>orElse</tt>, <tt>orElseGet</tt>, <tt>orElseThrow</tt>.
+
+</p><h2>Other Constraints</h2>
+
+<p>The following are the usual constraints.
+You should keep to the constructs and programming discipline 
+instilled throughout the module.</p>
+
+<ul>
+<li>Write each <tt>class</tt>/<tt>interface</tt> in its own file. </li>
+<li>Ensure that ALL object properties and class constants are declared <tt>private final</tt>. </li>
+<li>Ensure that that your classes are NOT cyclic dependent.</li>
+<li>ONLY the following java libraries ARE allowed:
+<ul>
+<li><tt>java.lang</tt>
+</li><li><tt>java.util.List</tt>
+</li><li><tt>java.util.Optional</tt>
+</li><li><tt>java.util.stream.Stream</tt>, and 
+</li><li>functional interfaces from <tt>java.util.function</tt>.
+</li></ul>
+</li><li>Use <tt>&amp;&amp;</tt>, <tt>||</tt> and <tt>!</tt> in logical expressions.
+</li><li>You are NOT allowed to use java keywords/literals: <tt>null</tt>, <tt>instanceof</tt>
+</li><li>You are NOT allowed to use Java reflection, i.e. <tt>Object::getClasses</tt> and other methods from <tt>Class</tt>
+</li><li>You are NOT allowed to use <tt>*</tt> wildcard imports.
+</li><li>You are NOT allowed to define anonymous inner classes; define lambdas instead.
+</li><li>You are NOT allowed to define array constructs, e.g.
+<tt>String[]</tt> or using ellipsis, e.g.<tt>String...</tt>
+</li></ul>
+
+<p>This task comprises a number of levels.
+You are required to complete ALL levels.</p>
+
+
+<h2>Level 1</h2>
+
+<p>Write an immutable <tt>Num</tt> class that inherits from <tt>AbstractNum</tt> with the following <tt>static</tt> methods:
+
+</p><ul>
+<li><tt>of(int i)</tt> that takes in an integer <tt>i</tt> and
+returns it as a natural number if <tt>i &gt;= 0</tt>, or an invalid natural number <tt>NaN</tt> otherwise.
+You will need to define appropriate <tt>private</tt> constructor(s).
+Use <tt>AbstractNum.valid</tt> to help you determine the validity of the natural number.
+
+</li><li>The <tt>zero()</tt> method is defined for you.  
+It returns the natural number representing zero.
+You will need to write the accompanying <tt>private</tt> constructor.
+
+<pre>    static Num zero() {
+        return new Num(AbstractNum.zero());
+    }
+</pre>
+
+</li></ul>
+
+<pre>jshell&gt; Num zero = Num.zero()
+zero ==&gt; 0
+
+jshell&gt; Num one = Num.of(1)
+one ==&gt; 1
+
+jshell&gt; Num invalid = Num.of(-1)
+invalid ==&gt; NaN
+
+jshell&gt; List&lt;AbstractNum&gt; list = List.&lt;AbstractNum&gt;of(zero, one, invalid)
+list ==&gt; [0, 1, NaN]
+</pre>
+
+<p>Using the function <tt>s</tt> defined in <tt>AbstractNum</tt>, write a <tt>succ</tt> method that returns the successor of a natural number.  If the number is invalid, it's successor is also invalid.
+In addition, write a <tt>static</tt> method <tt>one()</tt> that returns the natural number <tt>1</tt>.
+
+</p><pre>jshell&gt; Num.one()
+$.. ==&gt; 1
+
+jshell&gt; Num.zero().succ()
+$.. ==&gt; 1
+
+jshell&gt; Num.one().equals(Num.zero().succ()) // using AbstractNum::equals
+$.. ==&gt; true
+
+jshell&gt; Num.of(-1).succ()
+$.. ==&gt; NaN
+
+jshell&gt; Num.one().succ().succ()
+$.. ==&gt; 3
+
+jshell&gt; Num.of(-1).succ().succ()
+$.. ==&gt; NaN
+</pre>
+
+<h2>Level 2</h2>
+
+<p>Write the <tt>add</tt> method that takes in a natural number and returns the result of addition as a natural number.  You will need to call <tt>succ</tt> repeatedly until the result is reached.
+Moreover, an add operation is only possible if both operands are valid.
+
+</p><p>You may choose to write a loop construct or use <tt>Stream</tt>.
+Do not use recursion.
+Also pay attention to the restriction on <tt>Optional</tt> methods.
+
+</p><pre>jshell&gt; Num one = Num.one()
+one ==&gt; 1
+
+jshell&gt; Num zero = Num.zero()
+zero ==&gt; 0
+
+jshell&gt; Num invalid = Num.of(-1)
+invalid ==&gt; NaN
+
+jshell&gt; zero.add(zero)
+$.. ==&gt; 0
+
+jshell&gt; zero.add(one)
+$.. ==&gt; 1
+
+jshell&gt; zero.add(invalid)
+$.. ==&gt; NaN
+
+jshell&gt; one.add(zero)
+$.. ==&gt; 1
+
+jshell&gt; one.add(one)
+$.. ==&gt; 2
+
+jshell&gt; one.add(invalid)
+$.. ==&gt; NaN
+
+jshell&gt; invalid.add(zero)
+$.. ==&gt; NaN
+
+jshell&gt; Num result = zero.add(one).add(zero).add(one)
+result ==&gt; 2
+
+jshell&gt; result.add(result)
+$.. ==&gt; 4
+
+jshell&gt; zero.add(invalid).add(zero).add(one)
+$.. ==&gt; NaN
+</pre>
+
+<h2>Level 3</h2>
+
+<p>Include the <tt>mul</tt> and <tt>sub</tt> methods to perform 
+multiplication and subtraction respectively.
+Suppose <tt>m</tt> and <tt>n</tt> are valid natural numbers,
+
+</p><ul>
+<li>For multiplication, say <tt>m.mul(n)</tt>, it can be seen as <tt>m</tt> repeated additions of <tt>n</tt>, or vice-versa.
+</li><li>For subtraction, say <tt>m.sub(n)</tt>, it is observed that it is equivalent to the addition,
+i.e. <tt>(-n).add(m)</tt>.  That is to say, we need to negate the argument <tt>n</tt> (without invalidating it), and then add <tt>m</tt> to it.
+Use the <tt>n</tt> function in <tt>AbstractNum</tt>.
+</li></ul>
+
+<p>Just like addition, the <tt>mul</tt> and <tt>sub</tt> operations are only possible if both operands are valid.
+
+</p><pre>jshell&gt; Num one = Num.one()
+one ==&gt; 1
+
+jshell&gt; Num zero = Num.zero()
+zero ==&gt; 0
+
+jshell&gt; Num invalid = Num.of(-1)
+invalid ==&gt; NaN
+
+jshell&gt; zero.sub(zero)
+$.. ==&gt; 0
+
+jshell&gt; zero.sub(one)
+$.. ==&gt; NaN
+
+jshell&gt; zero.sub(invalid)
+$.. ==&gt; NaN
+
+jshell&gt; one.sub(zero)
+$.. ==&gt; 1
+
+jshell&gt; one.sub(one)
+$.. ==&gt; 0
+
+jshell&gt; one.sub(invalid)
+$.. ==&gt; NaN
+
+jshell&gt; invalid.sub(zero)
+$.. ==&gt; NaN
+
+jshell&gt; zero.mul(zero)
+$.. ==&gt; 0
+
+jshell&gt; zero.mul(one)
+$.. ==&gt; 0
+
+jshell&gt; zero.mul(invalid)
+$.. ==&gt; NaN
+
+jshell&gt; one.mul(zero)
+$.. ==&gt; 0
+
+jshell&gt; one.mul(one)
+$.. ==&gt; 1
+
+jshell&gt; one.mul(invalid)
+$.. ==&gt; NaN
+
+jshell&gt; invalid.mul(zero)
+$.. ==&gt; NaN
+
+jshell&gt; Num.of(2).mul(Num.of(3))
+$.. ==&gt; 6
+</pre>
+
+<h2>Level 4</h2>
+
+<p>Natural numbers are pretty boring.  Let's include natural fractions!
+
+</p><p>A valid natural fraction comprises a numerator and denominator part that are valid natural numbers.
+In addition, the denominator must not be zero.
+
+</p><p>The <tt><a href="Frac.java">Frac</a></tt> class is given to you.
+
+</p><pre>class Frac extends Pair&lt;Num, Num&gt; {
+    private Frac(Num n, Num d) {
+        super(n, d);
+    }
+
+    static Frac of(Num n, Num d) {
+        return new Frac(n, d);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s : %s", t(), u());
+    }
+}
+</pre>
+
+<p>It's a simplified <tt><a href="Pair.java">Pair</a></tt> class where both values of the pair are of type
+<tt>Num</tt>.
+It also contains a <tt>toString</tt> method that returns the appropriate <tt>String</tt>
+representation of the fraction.
+
+</p><p>Write an immutable <tt>Fraction</tt> class that inherits from <tt>AbstractNum</tt>
+with a <tt>static</tt> method <tt>of</tt> (with appropriate constructors) that takes
+in two integer values <tt>n</tt> and <tt>d</tt> and creates a fraction <tt>n : d</tt>
+
+</p><pre>jshell&gt; Fraction.of(1, 2)
+$.. ==&gt; 1 : 2
+
+jshell&gt; Fraction.of(2, 1)
+$.. ==&gt; 2 : 1
+
+jshell&gt; Fraction.of(2, 2)
+$.. ==&gt; 2 : 2
+
+jshell&gt; Fraction.of(0, 2)
+$.. ==&gt; 0 : 2
+
+jshell&gt; Fraction.of(2, 0)
+$.. ==&gt; NaN
+
+jshell&gt; Fraction.of(-1, 2)
+$.. ==&gt; NaN
+
+jshell&gt; Fraction.of(1, -2)
+$.. ==&gt; NaN
+</pre>
+
+
+<h2>Level 5</h2>
+
+<p>Include the <tt>add</tt>, <tt>sub</tt> and <tt>mul</tt> operations to operate on two fractions.
+
+</p><p>In case you forget,
+
+</p><pre> a     c     ad + bc
+--- + --- = ---------
+ b     d       bd
+
+ a     c     ad - bc
+--- - --- = ---------
+ b     d       bd
+
+ a     c     ac
+--- x --- = ----
+ b     d     bd
+</pre>
+
+<p>Just like <tt>Num</tt>, operations are only possible if both operands are valid.
+
+</p><pre>jshell&gt; Fraction.of(1, 2).add(Fraction.of(1, 4))
+$.. ==&gt; 6 : 8
+
+jshell&gt; Fraction.of(-1, 2).add(Fraction.of(1, 4))
+$.. ==&gt; NaN
+
+jshell&gt; Fraction.of(1, 2).sub(Fraction.of(1, 4))
+$.. ==&gt; 2 : 8
+
+jshell&gt; Fraction.of(1, 4).sub(Fraction.of(1, 2))
+$.. ==&gt; NaN
+
+jshell&gt; Fraction.of(1, 2).mul(Fraction.of(2, 1))
+$.. ==&gt; 2 : 2
+
+jshell&gt; Fraction.of(1, 2).mul(Fraction.of(2, 0))
+$.. ==&gt; NaN
+</pre>
+
+<p><i>Self-challenge... you may want to try implementing a method
+<tt>reduce()</tt> to simplify the fraction.</i>
+
+<!--
+<h2>Level 6</h2>
+
+<p>You will probably notice that the fractions are not in the reduced form.
+Write a method <tt>reduce()</tt> to reduce the fraction to it's simplest form.
+
+<pre>
+jshell&gt; Fraction.of(1, 2).add(Fraction.of(1, 4)).reduce()
+$.. ==&gt; 3 : 4
+
+jshell&gt; Fraction.of(-1, 2).add(Fraction.of(1, 4)).reduce()
+$.. ==&gt; NaN
+
+jshell&gt; Fraction.of(1, 2).sub(Fraction.of(1, 4)).reduce()
+$.. ==&gt; 1 : 4
+
+jshell&gt; Fraction.of(1, 4).sub(Fraction.of(1, 2)).reduce()
+$.. ==&gt; NaN
+
+jshell&gt; Fraction.of(1, 2).mul(Fraction.of(2, 1)).reduce()
+$.. ==&gt; 1 : 1
+
+jshell&gt; Fraction.of(1, 2).mul(Fraction.of(2, 0)).reduce()
+$.. ==&gt; NaN
+</pre>
+-->
+
+
+		</p></div></div>                          
+									<input type="hidden" id="tid" name="tid" value="5627">
+		</div>
+		<!-- end content -->
+</div>
+<!-- end inner -->
+<div id="loading-mask">
+        <p id="loading_mask_loader" class="loader" style="display: none;"> <img alt="Loading..." src="./index_files/ajax-loader-tr.gif"> <br>
+                Please wait... </p>
+</div>
+
+
+</div> <!-- end outer -->
+
+</div> <!-- end container -->
+
+
+
+<span id="PING_CONTENT_DLS_POPUP" style="display: none;"></span><div style="background-color: transparent; border: none; bottom: 15px; display: block; margin: 0px; opacity: 1; padding: 0px; position: fixed; right: 15px; z-index: 2147483647;"><template shadowrootmode="closed"><style>/*!
+ * 
+ *     MCAFEE RESTRICTED CONFIDENTIAL
+ *     Copyright (c) 2025 McAfee, LLC
+ *
+ *     The source code contained or described herein and all documents related
+ *     to the source code ("Material") are owned by McAfee or its
+ *     suppliers or licensors. Title to the Material remains with McAfee
+ *     or its suppliers and licensors. The Material contains trade
+ *     secrets and proprietary and confidential information of McAfee or its
+ *     suppliers and licensors. The Material is protected by worldwide copyright
+ *     and trade secret laws and treaty provisions. No part of the Material may
+ *     be used, copied, reproduced, modified, published, uploaded, posted,
+ *     transmitted, distributed, or disclosed in any way without McAfee's prior
+ *     express written permission.
+ *
+ *     No license under any patent, copyright, trade secret or other intellectual
+ *     property right is granted to or conferred upon you by disclosure or
+ *     delivery of the Materials, either expressly, by implication, inducement,
+ *     estoppel or otherwise. Any license under such intellectual property rights
+ *     must be expressed and approved by McAfee in writing.
+ *
+ */
+@font-face{font-family:"McAfeePoppins";src:url("../../../fonts/Poppins-Thin.ttf") format("truetype");font-weight:100;font-style:normal}@font-face{font-family:"McAfeePoppins";src:url("../../../fonts/Poppins-ThinItalic.ttf") format("truetype");font-weight:100;font-style:italic}@font-face{font-family:"McAfeePoppins";src:url("../../../fonts/Poppins-ExtraLight.ttf") format("truetype");font-weight:200;font-style:normal}@font-face{font-family:"McAfeePoppins";src:url("../../../fonts/Poppins-ExtraLightItalic.ttf") format("truetype");font-weight:200;font-style:italic}@font-face{font-family:"McAfeePoppins";src:url("../../../fonts/Poppins-Light.ttf") format("truetype");font-weight:300;font-style:normal}@font-face{font-family:"McAfeePoppins";src:url("../../../fonts/Poppins-LightItalic.ttf") format("truetype");font-weight:300;font-style:italic}@font-face{font-family:"McAfeePoppins";src:url("../../../fonts/Poppins-Regular.ttf") format("truetype");font-weight:400;font-style:normal}@font-face{font-family:"McAfeePoppins";src:url("../../../fonts/Poppins-Italic.ttf") format("truetype");font-weight:400;font-style:italic}@font-face{font-family:"McAfeePoppins";src:url("../../../fonts/Poppins-Medium.ttf") format("truetype");font-weight:500;font-style:normal}@font-face{font-family:"McAfeePoppins";src:url("../../../fonts/Poppins-MediumItalic.ttf") format("truetype");font-weight:500;font-style:italic}@font-face{font-family:"McAfeePoppins";src:url("../../../fonts/Poppins-SemiBold.ttf") format("truetype");font-weight:600;font-style:normal}@font-face{font-family:"McAfeePoppins";src:url("../../../fonts/Poppins-SemiBoldItalic.ttf") format("truetype");font-weight:600;font-style:italic}@font-face{font-family:"McAfeePoppins";src:url("../../../fonts/Poppins-Bold.ttf") format("truetype");font-weight:700;font-style:normal}@font-face{font-family:"McAfeePoppins";src:url("../../../fonts/Poppins-BoldItalic.ttf") format("truetype");font-weight:700;font-style:italic}@font-face{font-family:"McAfeePoppins";src:url("../../../fonts/Poppins-ExtraBold.ttf") format("truetype");font-weight:800;font-style:normal}@font-face{font-family:"McAfeePoppins";src:url("../../../fonts/Poppins-ExtraBoldItalic.ttf") format("truetype");font-weight:800;font-style:italic}@font-face{font-family:"McAfeePoppins";src:url("../../../fonts/Poppins-Black.ttf") format("truetype");font-weight:900;font-style:normal}@font-face{font-family:"McAfeePoppins";src:url("../../../fonts/Poppins-BlackItalic.ttf") format("truetype");font-weight:900;font-style:italic}*{border:0;box-sizing:border-box;font:inherit;font-family:"McAfeePoppins",Helvetica,Arial;font-size:100%;margin:0;padding:0;vertical-align:baseline;outline:none}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}html,body{background-color:#f5f6fa;font-family:"McAfeePoppins",Helvetica,Arial;line-height:1;height:100%;width:100%}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:"";content:none}table{border-collapse:collapse;border-spacing:0}b{font-weight:bold}img{display:block}.dls__container{align-items:center;display:flex;margin:0 auto;margin-top:50px;position:relative}.dls__popup__expanded{align-items:center;overflow:hidden;border-radius:100px;cursor:pointer;display:flex;left:0;padding:15px;position:absolute;height:95px;width:383px;background-color:#fff;transition:all .3s ease-in-out}.dls__popup__expanded .dls__icon{height:65px;width:73px}.content{margin-left:12px}.content .content__images{display:flex;align-items:center;width:250px}.content .content__images .seperator__line{margin-left:5px;margin-right:10px}.content .content__images #dls_close_icon{cursor:pointer;margin-left:auto;margin-right:0px}.content p{font-family:"McAfeePoppins",Helvetica,Arial;font-weight:"400";font-size:14px;line-height:20px;margin-top:8px;color:#4258ff;width:250px;cursor:pointer}.shield{overflow:hidden;box-shadow:0px 2px 4px 0px rgba(33,41,52,.12),0px -1px 2px 0px rgba(0,0,0,.08);align-items:center;border-radius:100px;bottom:0;display:flex;height:95px;justify-content:center;position:absolute;right:0;width:383px;transition:all .3s ease-in-out}.shield__circle{display:flex;justify-content:center;align-items:center;width:55px;height:55px;background-color:#c01818;transition:all .6s ease-in-out .2s;z-index:1;opacity:0}
+
+/*# sourceMappingURL=../sourceMap/chrome/css/download_scan_popup.css.map*/</style><div class="dls__container">
+  <div class="shield" style="background: transparent; opacity: 0.1; display: none;">
+    <div class="shield__circle" style="opacity: 1;">
+      <img src="chrome-extension://fheoggkfdfchfphceeifdbepaooicaho/images/download_scan/mcafee_logo_white.svg?secret=nlfnr5" x-mcsrc="" id="dls_ballon_icon" x-mcsrcparsed="true">
+    </div>
+    <div class="dls__popup__expanded" style="opacity: 0;">
+      <img src="chrome-extension://fheoggkfdfchfphceeifdbepaooicaho/images/download_scan/download_scan_icon.svg?secret=nlfnr5" x-mcsrc="" class="dls__icon" x-mcsrcparsed="true">
+      <div class="content">
+        <div class="content__images">
+          <img src="chrome-extension://fheoggkfdfchfphceeifdbepaooicaho/images/download_scan/mcafee_logo_red.svg?secret=nlfnr5" x-mcsrc="" id="dls_mcafee_logo" x-mcsrcparsed="true">
+          <img src="chrome-extension://fheoggkfdfchfphceeifdbepaooicaho/images/download_scan/seperator_line.svg?secret=nlfnr5" x-mcsrc="" class="seperator__line" x-mcsrcparsed="true">
+          <img src="chrome-extension://fheoggkfdfchfphceeifdbepaooicaho/images/download_scan/webadvisor.svg?secret=nlfnr5" x-mcsrc="" x-mcsrcparsed="true">
+          <img src="chrome-extension://fheoggkfdfchfphceeifdbepaooicaho/images/download_scan/close-outline.svg?secret=nlfnr5" x-mcsrc="" id="dls_close_icon" x-mcsrcparsed="true">
+        </div>
+        <p id="download_scan_popup_expanded_descriptions">Your download's being scanned. We'll let you know if there's an issue.</p>
+      </div>
+    </div>
+  </div>
+</div><style>/*!
+ * 
+ *     MCAFEE RESTRICTED CONFIDENTIAL
+ *     Copyright (c) 2025 McAfee, LLC
+ *
+ *     The source code contained or described herein and all documents related
+ *     to the source code ("Material") are owned by McAfee or its
+ *     suppliers or licensors. Title to the Material remains with McAfee
+ *     or its suppliers and licensors. The Material contains trade
+ *     secrets and proprietary and confidential information of McAfee or its
+ *     suppliers and licensors. The Material is protected by worldwide copyright
+ *     and trade secret laws and treaty provisions. No part of the Material may
+ *     be used, copied, reproduced, modified, published, uploaded, posted,
+ *     transmitted, distributed, or disclosed in any way without McAfee's prior
+ *     express written permission.
+ *
+ *     No license under any patent, copyright, trade secret or other intellectual
+ *     property right is granted to or conferred upon you by disclosure or
+ *     delivery of the Materials, either expressly, by implication, inducement,
+ *     estoppel or otherwise. Any license under such intellectual property rights
+ *     must be expressed and approved by McAfee in writing.
+ *
+ */
+.mc-interactive-balloon{position:absolute;right:-50px;bottom:8px;box-shadow:rgba(0,0,0,.12) 0px 0px 10px;height:40px;width:40px;background:#1671ee;border-radius:20px;display:flex;justify-content:center;align-items:center}
+
+/*# sourceMappingURL=../sourceMap/chrome/css/interactive_balloon.css.map*/</style></template></div></body></html>

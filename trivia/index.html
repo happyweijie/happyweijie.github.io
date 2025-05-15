@@ -23,22 +23,22 @@
                 <!-- Question 1-->
                 <h3>1. For the elements in the third period of the Periodic Table, which property decreases consistently from sodium to chlorine?</h3>
 
-                <button class="wrong">melting point</button>
-                <button class="correct">radius of the atom</button>
-                <button class="wrong">electrical conductivity</button>
-                <button class="wrong">ionisation energy</button>
+                <button class="wrong q1">melting point</button>
+                <button class="correct q1">radius of the atom</button>
+                <button class="wrong q1">electrical conductivity</button>
+                <button class="wrong q1">ionisation energy</button>
 
-                <p id="status1">
+                <p id="q1-status">
 
                 <!-- Question 2-->
                 <h3>2. What is the element that has a second ionisation energy lower than that of each of the elements either side of it in the Periodic Table?</h3>
 
-                <button class="wrong">boron</button>
-                <button class="wrong">oxygen</button>
-                <button class="wrong">nitrogen</button>
-                <button class="correct">fluorine</button>
+                <button class="wrong q2">boron</button>
+                <button class="wrong q2">oxygen</button>
+                <button class="wrong q2">nitrogen</button>
+                <button class="correct q2">fluorine</button>
 
-                <p id="status4">
+                <p id="q2-status">
 
             </div>
 
@@ -54,48 +54,9 @@
 
                 <button id="submitBtn">Check Answer</button>
 
-                <p id="status2">
+                <p id="q3-status">
             </div>
         </div>
-        <script>
-            // TODO: Add code to check answers to questions
-            // Verify answer for multiple choice question
-            let x = 0;
-            mcqStatus = ['status1', 'status4'];
-            document.addEventListener('DOMContentLoaded', function() {
-                // Correct Answers
-                let corrects = document.querySelectorAll('.correct');
-                for (let i = 0; i < corrects.length; i++)
-                {
-                    corrects[i].addEventListener('click', function() {
-                        corrects[i].style.backgroundColor = 'green';
-                        document.getElementById(mcqStatus[x]).innerHTML = 'Correct!';
-                        x++;
-                    });
-                }
-
-                // Wrong answers
-                let wrongs = document.querySelectorAll('.wrong');
-                for (let i = 0; i < wrongs.length; i++)
-                {
-                    wrongs[i].addEventListener('click', function() {
-                        wrongs[i].style.backgroundColor = "red";
-                        document.getElementById(mcqStatus[x]).innerHTML = "Incorrect";
-                    });
-                }
-            });
-
-            // Open-ended
-            document.querySelector('#submitBtn').addEventListener('click', function() {
-                let input = document.querySelector('#response');
-                if (input.value.toLowerCase() === 'hydrogen') {
-                    input.style.backgroundColor = "green";
-                    document.querySelector('#status2').innerHTML = "Correct!";
-                } else {
-                    input.style.backgroundColor = "red";
-                    document.querySelector('#status2').innerHTML = "Incorrect";
-                }
-            });
-        </script>
+        <script src="script.js"></script>
     </body>
 </html>

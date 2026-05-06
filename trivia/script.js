@@ -1,32 +1,30 @@
 // Verify answer for multiple choice question
-document.addEventListener("DOMContentLoaded", () => {
-  let questions = document.querySelectorAll(".question");
+let questions = document.querySelectorAll(".question");
 
-  questions.forEach(question => {
-    // Options
-    let options = question.querySelectorAll(".option");
+questions.forEach(question => {
+  // Options
+  let options = question.querySelectorAll(".option");
 
-    options.forEach(option => {
-      option.addEventListener("click", () => {
-        // Reset all option colors
-        options.forEach(opt => {
-          opt.style.backgroundColor = "";
-        });
-
-        // Correct or wrong answer
-        if (option.classList.contains("correct")) {
-          option.style.backgroundColor = "green";
-          question.querySelector(".status").innerHTML = "Correct!";
-
-          // Disable all options after selection
-          options.forEach(opt => {
-            opt.disabled = true;
-          });
-        } else {
-          option.style.backgroundColor = "red";
-          question.querySelector(".status").innerHTML = "Incorrect!";
-        }
+  options.forEach(option => {
+    option.addEventListener("click", () => {
+      // Reset all option colors
+      options.forEach(opt => {
+        opt.style.backgroundColor = "";
       });
+
+      // Correct or wrong answer
+      if (option.classList.contains("correct")) {
+        option.style.backgroundColor = "green";
+        question.querySelector(".status").innerHTML = "Correct!";
+
+        // Disable all options after selection
+        options.forEach(opt => {
+          opt.disabled = true;
+        });
+      } else {
+        option.style.backgroundColor = "red";
+        question.querySelector(".status").innerHTML = "Incorrect!";
+      }
     });
   });
 });

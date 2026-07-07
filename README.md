@@ -2,4 +2,4 @@
 
 Wei Jie's personal webpage. 
 
-Design from https://leslieyip02.github.io/
+Design from Leslie Yip's website: https://leslieyip02.github.io/

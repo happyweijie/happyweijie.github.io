@@ -9,9 +9,9 @@ const COLORS = {
   background: "#0f172a",
   edge: "#4b5d75",
   node: "#93a9c4",
-  nodeText: "#8ca3c0",
+  nodeText: "#a2b7d0",
   accent: "#7da3c4",
-  caption: "#8ca3c0",
+  caption: "#a2b7d0",
 };
 
 let nodes = [];

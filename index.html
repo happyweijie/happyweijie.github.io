@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chew Wei Jie</title>
+
+  <link rel="stylesheet" href="./index.css">
+  <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/p5.js"></script>
+</head>
+
+<body>
+  <div class="sidebar">
+    <a class="sidebar__link" href="#about">About Me</a>
+    <a class="sidebar__link" href="#experience">Experience</a>
+    <a class="sidebar__link" href="#projects">Projects</a>
+    <a class="sidebar__link" href="#activities">Activities</a>
+    <a class="sidebar__link" href="#films">Short Films</a>
+  </div>
+
+  <main>
+    <section id="about">
+      <div id="sketch">
+        <script src="./sketch.js"></script>
+      </div>
+
+      <div class="about__text">
+        <h1>About Me</h1>
+        <p>
+          Hello, world! I'm Chew Wei Jie, and I'm studying Computer Science at NUS, with an interest in Software Engineering, Database Systems and Algorithms.
+        </p>
+        <br>
+        <p>
+          Outside of code, I enjoy running, gym, alt-rock music and watching films. My favourite film this year (2026) is currently <i>Obsession</i> (dir: Curry Baker).
+        </p>
+        <div class="about__contacts">
+          <a href="mailto:weijie.chew.cs@gmail.com">
+            <img class="badge"
+              src="https://img.shields.io/badge/Gmail-d14836?style=for-the-badge&logo=gmail&logoColor=ffffff" />
+          </a>
+          <a href="https://github.com/happyweijie">
+            <img class="badge"
+              src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=ffffff" />
+          </a>
+          <a href="https://www.linkedin.com/in/wei-jie-chew-6173a5235/">
+            <img class="badge"
+              src="https://custom-icon-badges.demolab.com/badge/LinkedIn-0077b5?style=for-the-badge&logo=linkedin-white&logoColor=ffffff" />
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div>
+        <h1>Experience</h1>
+      </div>
+
+      <div id="timeline">
+
+        <div class="experience__role">
+          <h2>LLMs & Agentic Workflows Intern</h2>
+          <h3>Ministry of National Development</h3>
+          <h3>05/26 - 08/26</h3>
+        </div>
+        <div class="timeline__segment">
+          <div class="timeline__circle"></div>
+          <div class="timeline__line"></div>
+        </div>
+        <div class="experience__description">
+          <p class="experience__emojis">🤖✨愛</p>
+          <br>
+          <p>> Built agentic workflows for automated policy analysis with Pydantic AI.</p>
+          <br>
+          <div>
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/Python-3776ab?style=for-the-badge&logo=python&logoColor=ffffff" />
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/Pydantic%20AI-E520E9?style=for-the-badge&logo=pydantic&logoColor=white" />
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" />
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/DuckDB-FFF000?style=for-the-badge&logo=duckdb&logoColor=black" />
+          </div>
+        </div>
+
+        <div class="experience__role">
+          <h2>Teaching Assistant</h2>
+          <h3>NUS School of Computing</h3>
+          <h3>01/26 - 05/26</h3>
+        </div>
+        <div class="timeline__segment">
+          <div class="timeline__circle"></div>
+          <div class="timeline__line"></div>
+        </div>
+        <div class="experience__description">
+          <p class="experience__emojis">🤓♨️🧩</p>
+          <br>
+          <p>> Conducted weekly live Java demos on OOP concepts and implementing common data structures and algorithms.</p>
+          <br>
+          <div>
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/Java-ed8b00?style=for-the-badge&logo=openjdk&logoColor=ffffff" />
+          </div>
+        </div>
+
+        <div class="experience__role">
+          <h2>Backend & Automation Intern</h2>
+          <h3>SCloud Pte Ltd</h3>
+          <h3>01/24 - 03/24</h3>
+        </div>
+        <div class="timeline__segment">
+          <div class="timeline__circle"></div>
+          <div class="timeline__line"></div>
+        </div>
+        <div class="experience__description">
+          <p class="experience__emojis">☁️🚀⚙️</p>
+          <br>
+          <p>> Built Python automation tools for monthly billing, reducing turnaround by 95%.</p>
+          <br>
+          <div>
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/Python-3776ab?style=for-the-badge&logo=python&logoColor=ffffff" />
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div>
+        <h1>Projects</h1>
+      </div>
+
+      <div class="catalog">
+        <a class="catalog__entry" href="https://github.com/happyweijie/NUSProfs" target="_blank">
+          <img src="./images/orbital.png" />
+          <h2>NUSProfs</h2>
+          <p>A professor review platform for NUS students.</p>
+          <br>
+          <div>
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white" />
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white" />
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white" />
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" />
+          </div>
+        </a>
+
+        <a class="catalog__entry" href="https://github.com/sqonky1/SafeNotes" target="_blank">
+          <img src="./images/safenotes.png" />
+          <h2>SafeNotes</h2>
+          <p>A disguised crisis management app for domestic abuse victims.</p>
+          <br>
+          <div>
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" />
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/expo-1C1E24.svg?style=for-the-badge&logo=expo&logoColor=#D04A37" />
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" />
+          </div>
+        </a>
+
+        <a class="catalog__entry" href="https://github.com/happyweijie/auroramart" target="_blank">
+          <img src="./images/auroramart.png" />
+          <h2>AuroraMart</h2>
+          <p>A full-stack B2C e-commerce web application with integrated ML models.</p>
+          <br>
+          <div>
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white" />
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white" />
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=for-the-badge&logo=scikit-learn&logoColor=white" />
+          </div>
+        </a>
+
+        <a class="catalog__entry" href="https://github.com/happyweijie/erd-diagram-maker" target="_blank">
+          <img src="./images/erdDrawerUi.png" />
+          <h2>ERD Diagram Maker</h2>
+          <p>A lightweight browser-based editor for entity-relationship diagrams.</p>
+          <br>
+          <div>
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/JavaScript-f7df1e?style=for-the-badge&logo=javascript&logoColor=000000" />
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/HTML5-e34f26?style=for-the-badge&logo=html5&logoColor=ffffff" />
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/CSS3-1572b6?style=for-the-badge&logo=css3&logoColor=ffffff" />
+          </div>
+        </a>
+
+        <a class="catalog__entry" href="https://github.com/happyweijie/search" target="_blank">
+          <img src="./images/search.png" />
+          <h2>Search</h2>
+          <p>A front-end clone of Google Search.</p>
+          <br>
+          <div>
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/HTML5-e34f26?style=for-the-badge&logo=html5&logoColor=ffffff" />
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/CSS3-1572b6?style=for-the-badge&logo=css3&logoColor=ffffff" />
+          </div>
+        </a>
+        <a class="catalog__entry" href="https://github.com/happyweijie/trivia" target="_blank">
+          <img src="./images/trivia.png" />
+          <h2>Trivia</h2>
+          <p>A web-based trivia game that puts your H2 Chemistry knowledge to the test.</p>
+          <br>
+          <div>
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/JavaScript-f7df1e?style=for-the-badge&logo=javascript&logoColor=000000" />
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/HTML5-e34f26?style=for-the-badge&logo=html5&logoColor=ffffff" />
+          </div>
+        </a>
+
+        <!-- flexbox placeholder(s) -->
+        <div class="catalog__entry"></div>
+        <div class="catalog__entry"></div>
+      </div>
+    </section>
+
+    <section id="activities">
+      <div>
+        <h1>Activities</h1>
+      </div>
+
+      <div class="catalog">
+        <a class="catalog__entry" href="https://www.linkedin.com/showcase/nustudios" target="_blank">
+          <img src="./images/nustudios.png" />
+          <h2>nuSTUDIOs Film Productions</h2>
+          <h3>Events Head</h3>
+          <p>Project dircetor for nuSTUDIOs Open Call Film Festival.</p>
+          <br>
+        </a>
+
+        <a class="catalog__entry" href="#activities">
+          <img src="./images/code_exp.png" />
+          <h2>BrainHack</h2>
+          <h3>CODE_EXP 2025/2026</h3>
+          <p>Won first place in 2026 and runners-up in 2025.</p>
+          <br>
+          <div>
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" />
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/Next-black.svg?style=for-the-badge&logo=next.js&logoColor=white" />
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white" />
+            </div>
+        </a>
+
+        <a class="catalog__entry" href="#activities">
+          <img src="./images/manus.png" />
+          <h2>Manus AI Vibe-Building Hackathon</h2>
+          <p>Won first place by building an actually effective alarm clock app.</p>
+        </a>
+
+        <!-- <a class="catalog__entry" href="https://github.com/sqonky1/Spark" target="_blank">
+          <img src="./images/techjam.png" />
+          <h2>Tiktok TechJam 2025</h2>
+          <p>Built TikTok extension allowing fans to support creators through targeted advertisements and surveys.</p>
+          <br>
+          <div>
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" />
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/expo-1C1E24.svg?style=for-the-badge&logo=expo&logoColor=#D04A37" />
+          </div>
+        </a> -->
+
+        <a class="catalog__entry" href="https://github.com/happyweijie/micro-t" target="_blank">
+          <img src="./images/nusfintech.png" />
+          <h2>NUS Fintech Summit 2026 Hackathon</h2>
+          <p>Built app for creators to receive instant, low-fee RLUSD micropayments directly from their audience.</p>
+          <br>
+          <div>
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" />
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB" />
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/Xrp-black?style=for-the-badge&logo=xrp&logoColor=white" />
+          </div>
+        </a>
+
+        <a class="catalog__entry" href="https://nus.edu.sg/cfa/NAF_2025/" target="_blank">
+          <img src="./images/naf.png" />
+          <h2>NUS Arts Festival 2025</h2>
+          <p>Directed Raise the Red Lion (2025) and edited Stage Fright (2025).</p>
+        </a>
+
+        <!-- flexbox placeholder(s) -->
+        <div class="catalog__entry"></div>
+        <div class="catalog__entry"></div>
+      </div>
+    </section>
+
+    <section id="films">
+      <div>
+        <h1>Short Films</h1>
+      </div>
+
+      <p>> Absolute Cinema ⁶🫲🥴🫱⁷</p>
+      <div class="catalog">
+        
+        <a class="catalog__entry" href="https://www.youtube.com/playlist?list=PL_ZKuI1gBAkqAuay8QZvYdRHqGEchXDab"
+          target="_blank">
+          <img src="./images/stagefright.png" />
+          <h2>Stage Fright (2025)</h2>
+          <p>Spooky videos for an interactive play by NUS Stage, with nuSTUDIOs and NUS EML.</p>
+          <br>
+          <div>
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/Short%20Film-7da3c4?style=for-the-badge&logo=youtube&logoColor=000000" />
+          </div>
+        </a>
+
+        <a class="catalog__entry" href="https://youtu.be/iKj1QOEWdKQ" target="_blank">
+          <img src="./images/raise-the-red-lion.jpg" />
+          <h2>Raise the Red Lion (2025)</h2>
+          <p>Short film for NUS Arts Festival 2025.</p>
+          <br>
+          <div>
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/Short%20Film-7da3c4?style=for-the-badge&logo=youtube&logoColor=000000" />
+          </div>
+        </a>
+
+        <a class="catalog__entry" href="https://youtu.be/mXggMZHVbcA" target="_blank">
+          <img src="./images/torque.png" />
+          <h2>Torque (2020)</h2>
+          <p>Runner-up in the CNB Anti-Drug Video Competition 2020.</p>
+          <br>
+          <div>
+            <img class="badge badge--skills"
+              src="https://img.shields.io/badge/Short%20Film-7da3c4?style=for-the-badge&logo=youtube&logoColor=000000" />
+          </div>
+        </a>
+
+        <!-- flexbox placeholder(s) -->
+        <div class="catalog__entry"></div>
+        <div class="catalog__entry"></div>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>

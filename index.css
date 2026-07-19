@@ -1,320 +1,595 @@
-html {
-  height: 100%;
-  width: 100%;
-  margin: auto;
+/* ============================================================
+   Terminal-session design system
+   Palette lives here only; sketch.js reads these tokens at
+   runtime via getComputedStyle.
+   ============================================================ */
 
-  background-color: #0f172a;
-  font-family: 'Courier New', Courier, monospace;
-  scroll-behavior: smooth;
-  line-height: 1.2rem;
+:root {
+  --desktop: #161616;   /* page background behind the window */
+  --term-bg: #0c0c0c;   /* terminal body */
+  --chrome: #1c1c1c;    /* title bar */
+  --border: #2a2a2a;    /* window and card borders */
+  --green: #7ce38b;     /* prompt, links, node strokes */
+  --accent: #eae6de;    /* highlights, card titles, search path — warm
+                           off-white, clearly above --fg without glare */
+  --fg: #c0c0c0;        /* output text — ANSI white, 10.8:1 on --term-bg */
+  --dim: #8a8a8a;       /* dim text — 5.7:1 on --term-bg, do not darken */
+  --mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* the whole session zooms on big monitors: everything is sized in
+   rem/em/ch, so scaling the root scales the window proportionally
+   (16px up to 1500px viewports, growing to 21px at 2500px) */
+html {
+  font-size: clamp(16px, calc(16px + (100vw - 1500px) / 200), 21px);
 }
 
 body {
-  height: fit-content;
-  width: 80%;
-  margin: auto;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-h1 {
-  margin: 1.5rem auto;
-
-  color: #dbe4f0;
-  font-size: 1.5rem;
-}
-
-h2 {
   margin: 0;
-  margin-bottom: 0.5rem;
-
-  color: #c3d2e6;
-  font-size: 1.1rem;
+  padding: clamp(0.75rem, 3vw, 3rem);
+  /* clear the fixed status line (and the home indicator) on narrow screens */
+  padding-bottom: calc(3.5rem + env(safe-area-inset-bottom));
+  background: var(--desktop);
+  color: var(--fg);
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
-h3 {
-  margin: 0;
-  margin-bottom: 0.25rem;
-
-  color: #93a9c4;
-  font-size: 1rem;
+:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
 }
 
-p {
-  margin: 0;
-
-  color: #a2b7d0;
-}
-
-code {
-  padding: 0.25ch 0.5ch;
-
-  color: #93a9c4;
-  background-color: #1d2a42;
-  border-radius: 5px;
-}
-
-main {
-  height: fit-content;
-  width: 100%;
-  margin: 5rem 5rem 0rem 5rem;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-}
-
-section {
-  width: 100%;
-  margin: 2rem auto;
-}
-
-:nth-last-child(1 of section) {
-  margin-bottom: 0rem;
-}
-
-.sidebar {
-  position: fixed;
-  left: 0;
-  top: 20%;
-  margin: 2rem;
-
-  display: flex;
-  flex-direction: column;
-  border-left: #4b5d75 solid 2px;
-}
-
-.sidebar__link {
-  position: relative;
-  margin: 0.5rem 1rem;
-  padding: 0.25rem;
-
-  color: #5f7594;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.sidebar__link:hover {
-  color: #7da3c4;
-}
-
-.sidebar__link::before {
-  content: "";
+.sr-only {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 2px;
-  width: 100%;
-
-  display: block;
-  background-color: #dbe4f0;
-
-  transform: scaleX(0);
-  transform-origin: top left;
-  transition: all 0.3s ease;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-.sidebar__link:hover::before {
-  transform: scaleX(1);
+/* ---- terminal window ---- */
+
+.term {
+  max-width: 87.5rem;
+  margin: 0 auto;
+  background: var(--term-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: clip;
+  box-shadow: 0 20px 60px rgb(0 0 0 / 0.5);
 }
 
-#sketch {
-  margin: auto;
+.term-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.9rem;
+  background: var(--chrome);
+  border-bottom: 1px solid var(--border);
+  color: var(--dim);
+  font-size: 0.8rem;
+}
+
+.term-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
   flex-shrink: 0;
 }
 
-#sketch canvas {
-  max-width: 100%;
-  height: auto;
+.term-dot--close { background: #b3554e; }
+.term-dot--min { background: #b3893e; }
+.term-dot--max { background: #4e9e5f; }
+
+.term-title {
+  margin-left: 0.5rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-#about {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
+.term-shell {
+  margin-left: auto;
 }
 
-.badge {
-  filter: saturate(50%);
+.term-body {
+  padding: 2rem 2.5rem 3rem;
 }
 
-.badge--skills {
-  max-height: 1.5rem;
+/* ---- shell lines ---- */
+
+.line {
+  margin: 0;
+  padding-left: 4ch;
+  text-indent: -4ch;
+  overflow-wrap: break-word;
+  font-size: 1em;
+  font-weight: normal;
 }
 
-a:hover > .badge {
-  transform: scale(1.05);
-  transform-origin: center;
-  filter: saturate(100%);
-  transition: all 0.3s ease-out;
+.ps1 {
+  color: var(--green);
 }
 
-.about__text {
-  max-width: 80vw;
+.cmd {
+  color: var(--fg);
+  font-weight: 600;
 }
 
-.about__contacts {
-  margin-top: 1.5rem;
+.out {
+  margin: 0.75rem 0 0;
 }
 
-.about__contacts > a {
+/* figlet-style answer to `whoami` */
+.banner {
+  margin: 0 0 1rem;
+  color: var(--accent);
+  font-family: inherit;
+  font-size: clamp(0.7rem, 3vw, 1.05rem);
+  line-height: 1.2;
+}
+
+.out p {
+  margin: 0 0 0.75rem;
+  max-width: 68ch;
+}
+
+.out p:last-child {
+  margin-bottom: 0;
+}
+
+.comment {
+  color: var(--dim);
+}
+
+.cursor::after {
+  content: "";
+  display: inline-block;
+  width: 1ch;
+  height: 1.2em;
+  background: var(--green);
+  vertical-align: text-bottom;
+  animation: blink 1.1s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor::after {
+    animation: none;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ---- sections ---- */
+
+section {
+  margin-top: 3.5rem;
+  scroll-margin-top: 4.5rem;
+}
+
+.term-body > section:first-child {
+  margin-top: 0;
+}
+
+/* ---- sticky sidebar (wide screens only) ---- */
+
+.side-nav {
+  display: none;
+}
+
+@media (min-width: 1180px) {
+  body {
+    display: grid;
+    grid-template-columns: 11rem minmax(0, 87.5rem);
+    justify-content: center;
+    column-gap: 2rem;
+    align-items: start;
+    padding-bottom: clamp(0.75rem, 3vw, 3rem);
+    font-size: 1rem;
+  }
+
+  .term-body {
+    padding: 2.5rem 3.25rem 3.5rem;
+  }
+
+  .side-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    position: sticky;
+    top: 3rem;
+    text-align: right;
+    font-size: 1rem;
+  }
+}
+
+.side-nav a {
+  color: var(--green);
   text-decoration: none;
 }
 
-#experience {
-  display: flex;
-  flex-direction: column;
+/* the › is a menu cursor, not a web link: it snaps to the hovered or
+   focused item (no underline, no fade — TUI selection markers move
+   instantly) and rests on the active section otherwise */
+.side-nav a:hover::before,
+.side-nav a:focus-visible::before {
+  opacity: 1;
 }
 
-#timeline {
-  margin: auto;
-
-  display: grid;
-  grid-template-columns: 20% 1rem auto;
-  gap: 0 3em;
+.side-nav:has(a:hover) a.is-active:not(:hover)::before {
+  opacity: 0;
 }
 
-.timeline__segment {
-  height: 100%;
-  width: fit-content;
-  margin: auto;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.side-nav a.is-active {
+  font-weight: 600;
 }
 
-.timeline__circle {
-  height: 1.2rem;
-  width: 1.2rem;
-  margin: auto;
-  box-sizing: border-box;
-
-  border-radius: 100%;
-  border: 4px solid #6b7f9b;
+/* chevron space is reserved on every link (and weight is constant per
+   glyph box on the right-aligned text), so activation never reflows
+   the sticky column */
+.side-nav a::before {
+  content: "\203a\00a0";
+  opacity: 0;
 }
 
-.timeline__line {
-  min-height: 5rem;
-  flex-grow: 2;
-  width: 4px;
-  margin: auto;
-
-  background-color: #6b7f9b;
+.side-nav a.is-active::before {
+  opacity: 1;
 }
 
-:nth-last-child(1 of .timeline__segment) > .timeline__line {
-  border-radius: 2px 2px;
-}
+/* ---- tmux status line (narrow screens) ----
+   The sidebar's replacement below 1180px: a fixed window list
+   pinned to the bottom of the screen, tmux-style. */
 
-.experience__role,
-.experience__description {
-  padding-bottom: 3rem;
-}
-
-:nth-last-child(1 of .experience__role),
-:nth-last-child(1 of .experience__description) {
-  padding-bottom: 2rem;
-}
-
-.experience__emojis {
-  letter-spacing: 0.25rem;
-}
-
-.catalog {
-  width: 100%;
-  margin: 2rem auto;
-
+.status-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10; /* the page's only overlay */
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-  flex-wrap: wrap;
-  gap: 2rem;
+  padding: 0 max(0.75rem, env(safe-area-inset-left));
+  padding-bottom: env(safe-area-inset-bottom);
+  background: var(--chrome);
+  border-top: 1px solid var(--border);
+  font-size: 0.8rem;
+  overflow-x: auto;
 }
 
-.catalog__entry {
-  width: 30%;
-  min-width: 20vw;
-
-  flex-grow: 1;
+.status-nav a {
+  display: flex;
+  align-items: center;
+  padding: 0.85rem 0.25rem; /* ≥44px touch target */
+  color: var(--dim);
   text-decoration: none;
+  white-space: nowrap;
 }
 
-.catalog__entry:hover {
-  transform: scale(1.025);
-  transform-origin: center;
-  transition: all 0.3s ease;
+/* the tmux current-window asterisk; reserved when inactive so the
+   row doesn't shift as the highlight moves */
+.status-nav a::after {
+  content: "*";
+  opacity: 0;
 }
 
-.catalog__entry > img {
+.status-nav a.is-active {
+  color: var(--green);
+  font-weight: 600;
+}
+
+.status-nav a.is-active::after {
+  opacity: 1;
+}
+
+/* the sidebar takes over on wide screens (after the base rules above so
+   the override wins the cascade) */
+@media (min-width: 1180px) {
+  .status-nav {
+    display: none;
+  }
+}
+
+/* ---- shields.io badges ---- */
+
+.shield-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+/* 1.75rem = the badges' native 28px, so they render crisp */
+.shield {
+  display: block;
+  height: 1.75rem;
+  width: auto;
+}
+
+.shield-link {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+
+/* invisible hit-area extension: the 28px badges become ≥44px touch
+   targets without moving a pixel (±4px horizontal stays inside the
+   0.5rem row gap, so neighbours never overlap) */
+.shield-link::after {
+  content: "";
+  position: absolute;
+  inset: -8px -4px;
+}
+
+/* ---- experience log ----
+   Rendered as a downward DAG with drawn node/edge elements: each role
+   is a ring node (dark fill, muted border) on a left rail; a stem runs
+   beside the text into a solid arrowhead landing on the next node. */
+
+.log-entry {
+  position: relative;
+  margin-top: 2.25rem;
+  padding-left: 2.5rem;
+}
+
+/* node: a solid graph vertex — filled disc with a thick ring, centered
+   on the first line. box-sizing is explicit: the * reset doesn't match
+   pseudo-elements, and a border drawn outside the box is what let the
+   stem poke into the circle. */
+.log-entry::before {
+  content: "";
+  position: absolute;
+  box-sizing: border-box;
+  left: 0;
+  top: calc(0.8em - 0.625rem);
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--border);
+  border: 4px solid var(--dim);
+}
+
+/* edge: 3px stem flowing into a small arrowhead, carved from one
+   element; same color as the node ring. Runs flush from this node's
+   bottom tangent to the next node's top tangent — never inside. */
+.log-entry:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 0.25rem;
+  width: 0.75rem;
+  top: calc(0.8em + 0.625rem);
+  bottom: calc(-2.25rem - 0.8em + 0.625rem);
+  background: var(--dim);
+  clip-path: polygon(
+    calc(50% - 1.5px) 0,
+    calc(50% + 1.5px) 0,
+    calc(50% + 1.5px) calc(100% - 6px),
+    calc(50% + 4.5px) calc(100% - 6px),
+    50% 100%,
+    calc(50% - 4.5px) calc(100% - 6px),
+    calc(50% - 1.5px) calc(100% - 6px)
+  );
+}
+
+/* role leads the line, date sits flush right; org gets its own line */
+.log-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 2ch;
+}
+
+.log-date {
+  color: var(--dim);
+  white-space: nowrap;
+}
+
+.log-role {
+  margin: 0;
+  color: var(--accent);
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.log-org {
+  margin: 0.2rem 0 0;
+  color: var(--fg);
+}
+
+.log-emoji {
+  letter-spacing: 0.25rem;
+}
+
+.log-note {
+  margin: 0.5rem 0 0;
+  max-width: 70ch;
+}
+
+/* ---- card grids ("GUI output") ---- */
+
+/* fixed column counts so card size tracks the screen instead of
+   snapping between huge and tiny: 1 → 2 → always 3 on desktop */
+.gui {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 720px) {
+  .gui {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1180px) {
+  .gui {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.gui-card {
+  display: block;
+  padding: 1.25rem;
+  background: #101010;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease,
+    transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* hover styling only on devices that can hover; on touch, :hover would
+   stick to the last-tapped card */
+@media (hover: hover) {
+  a.gui-card:hover {
+    background: #131313;
+    border-color: var(--green);
+    transform: translateY(-3px) scale(1.015);
+    box-shadow: 0 10px 24px rgb(0 0 0 / 0.45);
+  }
+
+  a.gui-card:hover .gui-title {
+    color: var(--green);
+  }
+}
+
+a.gui-card:focus-visible {
+  background: #131313;
+  border-color: var(--green);
+  transform: translateY(-3px) scale(1.015);
+  box-shadow: 0 10px 24px rgb(0 0 0 / 0.45);
+}
+
+a.gui-card:focus-visible .gui-title {
+  color: var(--green);
+}
+
+/* touch feedback: border + background answer the press, no lift */
+a.gui-card:active {
+  background: #131313;
+  border-color: var(--green);
+}
+
+a.gui-card:active .gui-title {
+  color: var(--green);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a.gui-card:hover,
+  a.gui-card:focus-visible {
+    transform: none;
+  }
+}
+
+.gui-thumb {
+  display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
-  margin-bottom: 0.5rem;
-  box-sizing: border-box;
-
-  border-radius: 0.5rem;
-  filter: saturate(80%);
+  object-fit: cover;
+  margin-bottom: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
 }
 
-.catalog__entry:hover > img {
-  border: 3px solid #93a9c4;
-  filter: saturate(100%);
-  transition: all 0.3s ease-out;
+.gui-title {
+  margin: 0 0 0.3rem;
+  color: var(--accent);
+  font-size: 1.05em;
+  font-weight: 600;
+  transition: color 0.2s ease;
 }
 
-.catalog__entry:hover > h2 {
-  color: #7da3c4;
+.gui-sub {
+  margin: 0 0 0.3rem;
+  color: var(--dim);
+  font-size: 0.85em;
 }
 
-.catalog__entry:hover > p {
-  color: #b3c4da;
+.gui-desc {
+  margin: 0;
+  font-size: 0.95em;
 }
 
-.catalog__entry:hover > div > .badge--skills {
-  filter: saturate(100%);
-  transition: all 0.3s ease-out;
+.gui-card .shield {
+  height: 1.6rem;
 }
 
-@media only screen and (max-width: 720px) {
+/* ---- typing animation (progressive enhancement) ----
+   Gated on the .typing-enabled class main.js adds, so the
+   no-JS page shows every command instantly. */
+
+@media (prefers-reduced-motion: no-preference) and (min-width: 720px) {
+  html.typing-enabled .cmd[data-type] {
+    display: inline-block;
+    width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-indent: 0;
+    vertical-align: bottom;
+  }
+
+  html.typing-enabled .cmd[data-type].typed {
+    animation: type 0.8s steps(var(--n)) forwards;
+  }
+
+  @keyframes type {
+    to {
+      width: calc(var(--n) * 1ch);
+    }
+  }
+}
+
+/* ---- responsive ---- */
+
+@media (max-width: 720px) {
   body {
-    width: 100%;
+    padding: 0.5rem;
+    padding-bottom: calc(3.5rem + env(safe-area-inset-bottom));
+    font-size: 1rem; /* 16px floor for phone reading distance */
   }
 
-  main {
-    width: 85%;
-    margin: 3rem 0 0 0;
+  .term {
+    border-radius: 6px;
   }
 
-  .badge--skills {
-    max-height: 1rem;
-  }
-}
-
-@media only screen and (max-width: 960px) {
-  .sidebar {
+  .term-shell {
     display: none;
   }
 
-  #timeline {
-    grid-template-columns: 25% 1rem auto;
-    gap: 0 2rem;
+  .term-body {
+    padding: 1.25rem 1rem 2rem;
   }
 
-  .badge--skills {
-    max-height: 1.2rem;
-  }
-}
-
-@media only screen and (max-width: 1200px) {
-  #about {
-    flex-direction: column;
+  .shield {
+    height: 1.4rem;
   }
 
-  .catalog {
-    gap: 3rem 2rem;
+  .gui-card .shield {
+    height: 1.25rem;
   }
 }

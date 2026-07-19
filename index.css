@@ -332,6 +332,28 @@ section {
   position: relative;
   display: inline-block;
   line-height: 0;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+/* linked badges answer hover with a lift and a brightness step — the
+   cards' language, scaled to badge size */
+@media (hover: hover) {
+  .shield-link:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.15);
+  }
+}
+
+.shield-link:focus-visible {
+  transform: translateY(-3px);
+  filter: brightness(1.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shield-link:hover,
+  .shield-link:focus-visible {
+    transform: none; /* the brightness step alone carries the feedback */
+  }
 }
 
 /* invisible hit-area extension: the 28px badges become ≥44px touch

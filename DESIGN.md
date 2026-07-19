@@ -173,6 +173,7 @@ Interactive elements are quiet until touched: flat and understated at rest, answ
 
 ### Shield Rows
 - **Style:** shields.io `for-the-badge` images at exactly 1.75rem (native 28px) so they render crisp; 1.4rem on mobile, smaller inside cards. Flex-wrapped with 0.5rem gap.
+- **Linked badges** (the contact row's Gmail / GitHub / LinkedIn): a 3px lift plus a brightness step (`brightness(1.15)`) on hover and focus, gated behind `(hover: hover)`. Under reduced motion the lift is suppressed and the brightness step alone carries the feedback. Plain tech-stack badges never lift; only things that go somewhere move.
 
 ### The Experience Graph (signature component)
 - The experience log renders as a downward DAG with drawn node/edge elements, all in a single stroke color (Dim): each role is a solid graph vertex (1.25rem disc, Border-grey fill, 4px ring) centered on its first line, and a 3px stem runs beside the entry into a small arrowhead (9×6px, continuous with the stem) landing on the next node — `○──▶ ○──▶ ○` turned vertical. Stems meet the rings flush at their tangent points, never crossing inside (pseudo-elements need explicit `box-sizing: border-box`; the `*` reset doesn't reach them). Text keeps 2.5rem clearance from the rail. Built from empty CSS pseudo-elements; rem-sized so the graph scales with the fluid root. Newest role sits at the top; the arrows read "built on".

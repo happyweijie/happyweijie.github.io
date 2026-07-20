@@ -184,6 +184,7 @@ Interactive elements are quiet until touched: flat and understated at rest, answ
 ### Side Navigation
 - **Style:** Sticky right-aligned column of lowercase Prompt Green links, visible only ≥1180px.
 - **States:** The `›` is a menu cursor, not a link underline: it rests on the active section (which also carries 600 weight, driven by scroll position) and snaps instantly to whichever link is hovered or focused — no underline, no fade, TUI-style. Chevron space is reserved on every link so the marker never reflows the sticky column.
+- **Hover areas are contiguous:** vertical spacing lives inside each link as padding (never flex `gap`), so moving the cursor between two items never crosses a dead zone that would snap the marker back to the active section. The nav's negative `margin-block` cancels the first/last links' padding so the column's optical bounds stay put.
 
 ### Status Line (narrow-screen navigation)
 - **Style:** Below 1180px the sidebar is replaced by a tmux-style status line fixed to the bottom of the screen: Chrome background, 1px Border top, window-list entries (`0:about 1:exp 2:proj 3:acts 4:films`) in Dim Text at 0.8rem.

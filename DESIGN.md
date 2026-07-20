@@ -170,7 +170,7 @@ Interactive elements are quiet until touched: flat and understated at rest, answ
 - **No scaffolding:** No ruled underlines, no eyebrows, no numbering — the size jump and the dim command beneath carry the structure alone.
 
 ### Prompt Lines
-- **Structure:** `~ $ ` in Prompt Green + command in Output Text at 600 weight; hanging indent (4ch) for wrapped lines. **Demoted variant** (under a section heading): 0.85em, prompt keeps Prompt Green, command drops to Dim at 400 weight.
+- **Structure:** `~ $ ` in Prompt Green + command in Output Text at 600 weight; hanging indent (4ch) for wrapped lines. **Demoted variant** (under a section heading): 0.85em, prompt keeps Prompt Green, command drops to Dim at 400 weight. The closing idle prompt (blinking cursor) uses the demoted size too, so every prompt on the page matches.
 - **Motion:** None — commands are static, already-run output. The typing animation was removed (it pulled attention from the content); the blinking cursor at the session's end is the page's only idle motion.
 
 ### GUI Cards ("GUI output")

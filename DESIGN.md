@@ -3,6 +3,7 @@ name: happyweijie.github.io
 description: Wei Jie's personal portfolio rendered as a live terminal session
 colors:
   prompt-green: "#7ce38b"
+  headline-white: "#f7f3ea"
   signal-grey: "#eae6de"
   desktop: "#161616"
   terminal-black: "#0c0c0c"
@@ -21,14 +22,24 @@ typography:
     fontSize: "0.95rem"
     fontWeight: 400
     lineHeight: 1.6
+  heading:
+    fontFamily: 'ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, "Liberation Mono", monospace'
+    fontSize: "clamp(1.25rem, 1.15rem + 0.4vw, 1.45rem)"
+    fontWeight: 700
+    lineHeight: 1.3
   command:
     fontFamily: 'ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, "Liberation Mono", monospace'
     fontSize: "1em"
     fontWeight: 600
     lineHeight: 1.6
+  command-sub:
+    fontFamily: 'ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, "Liberation Mono", monospace'
+    fontSize: "0.85em"
+    fontWeight: 400
+    lineHeight: 1.6
   title:
     fontFamily: 'ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, "Liberation Mono", monospace'
-    fontSize: "1.05em"
+    fontSize: "1.1em"
     fontWeight: 600
     lineHeight: 1.6
   banner:
@@ -75,14 +86,14 @@ components:
 
 **Creative North Star: "The Live Terminal Session"**
 
-The site IS a running shell session — not a webpage decorated with terminal props. A visitor opens a zsh window sitting on a dark desktop; commands (`whoami`, `cat experience.log`, `ls projects/`) type themselves and their output renders below. Everything on the page must be something a real terminal user would recognize as correct: the prompt syntax, the `#` comments, the figlet banner, the blinking block cursor. The moment a detail reads as decoration rather than plausible shell output, it has failed. The playfulness (emoji in log entries, "goes brrr", `# Absolute Cinema`) lands precisely because the shell fluency underneath is genuine.
+The site IS a running shell session — not a webpage decorated with terminal props. A visitor opens a zsh window sitting on a dark desktop; commands (`whoami`, `cat experience.log`, `ls projects/`) sit with their output already rendered — a session that has just been run, idling at a blinking prompt. Everything on the page must be something a real terminal user would recognize as correct: the prompt syntax, the `#` comments, the figlet banner, the blinking block cursor. The moment a detail reads as decoration rather than plausible shell output, it has failed. The playfulness (emoji in log entries, "goes brrr", `# Absolute Cinema`) lands precisely because the shell fluency underneath is genuine.
 
 The system explicitly rejects the template dev portfolio (hero headshot, skill bars, timeline), the corporate resume site (beige, formal, forgettable), overdone hacker cosplay (Matrix rain, glitch effects, fake hacking theatrics), and design-agency flash (heavy WebGL, huge display type, scroll-jacking). The terminal is native, not costume — and it is a working tool, not a performance.
 
 **Key Characteristics:**
-- One monospace voice for everything; hierarchy comes from color and weight, never from font size jumps.
+- One monospace voice for everything; hierarchy comes from color and weight, with exactly one sanctioned size jump — the section headings (see The Flat Scale Rule).
 - Near-black layered surfaces stepped by hue-less greys; Prompt Green is the page's only chromatic color, and highlights are carried by bold-white grey.
-- Content is command output: sections open with a typed prompt line, prose flows as `stdout`, asides are `# comments`.
+- Sections open with a plain-English heading recruiters can scan (About / Experience / Projects / Activities / Films); the typed prompt line sits demoted beneath it as flavor, prose flows as `stdout`, asides are `# comments`.
 - GUI card grids are the one sanctioned break from pure text — "GUI output" launched from the shell.
 - Progressive enhancement throughout: fully readable with no JS, every animation has a reduced-motion fallback.
 
@@ -94,7 +105,8 @@ A near-black greyscale ramp carries the entire surface; one chromatic voice (gre
 - **Prompt Green** (#7ce38b): The interactive voice — and the page's only chromatic color. Marks the `~ $` prompt, nav links, focus outlines, card hover borders, and the blinking cursor. If it's green, you can act on it or the shell is talking to you.
 
 ### Secondary
-- **Signal Grey** (#eae6de): The highlight voice — a warm off-white, clearly above Output Text without the glare of pure white. Card titles, the figlet banner, and experience roles. It says "this is the headline of this output block" the way a real shell renders bold text, without competing with green's interactivity claim. Stark #ffffff is deliberately avoided: it reads harsh against the soft terminal palette.
+- **Headline White** (#f7f3ea): The headline voice — the brightest text on the page, one step above Signal Grey and still warm, never stark #ffffff. Section headings, experience roles, and card titles. It exists so the things a recruiter scans for (section names, job titles, project names) clear the surrounding text decisively.
+- **Signal Grey** (#eae6de): The highlight voice — a warm off-white, clearly above Output Text without the glare of pure white. The figlet banner and mid-tier highlights. It says "this is emphasized output" the way a real shell renders bold text, without competing with green's interactivity claim or Headline White's structural claim. Stark #ffffff is deliberately avoided: it reads harsh against the soft terminal palette.
 
 ### Neutral
 - **Desktop** (#161616): The page background behind the window — the desktop the terminal floats on.
@@ -107,7 +119,7 @@ A near-black greyscale ramp carries the entire surface; one chromatic voice (gre
 - **Traffic-light Dots** (#b3554e / #b3893e / #4e9e5f): The window chrome's close/min/max dots. Decorative quotation of terminal chrome, never UI meaning — muted so they don't compete with the Two Voices.
 
 ### Named Rules
-**The Two Voices Rule.** Prompt Green means interactive or shell-spoken; Signal Grey means highlighted output. Never swap the roles, and never introduce a second chromatic color for UI meaning — green is the only hue on the page (shields.io badge logos are quoted images, not palette).
+**The Two Voices Rule.** Prompt Green means interactive or shell-spoken; the warm off-whites (Headline White above Signal Grey) mean highlighted output. Never swap the roles, and never introduce a second chromatic color for UI meaning — green is the only hue on the page (shields.io badge logos are quoted images, not palette).
 
 **The Single Source Rule.** The palette lives only in `index.css` custom properties. Never hardcode a palette value in two places.
 
@@ -119,14 +131,16 @@ A near-black greyscale ramp carries the entire surface; one chromatic voice (gre
 **Character:** A single system monospace family everywhere, exactly as a real terminal renders. Deliberately flat: no display font, no type-scale theatrics. The figlet ASCII banner is the only "display type" on the page, and it is made of characters.
 
 ### Hierarchy
-- **Command** (600, 1em): The typed part of a prompt line (`whoami`, `ls projects/`). Weight, not size, marks it.
-- **Title** (600, 1.05em, Signal Grey): GUI card titles and experience roles — the largest text on the page by a whisker.
+- **Heading** (700, clamp(1.25rem, 1.15rem + 0.4vw, 1.45rem), 1.3 line-height, Headline White): The five section names — the page's only size jump, and the first thing a scanning recruiter reads.
+- **Command** (600, 1em): The typed part of a standalone prompt line. Weight, not size, marks it.
+- **Command, demoted** (400, 0.85em, command in Dim): The prompt line sitting under a section heading — the `~ $` keeps its green voice, the command drops to Dim at label size. Flavor, not structure.
+- **Title** (600, 1.1em, Headline White): GUI card titles and experience roles — above body on two axes, size and color.
 - **Body** (400, 0.95rem → 1rem ≥1180px, 1.6 line-height): All output prose, capped at 68–70ch.
 - **Banner** (400, clamp(0.7rem, 3vw, 1.05rem), 1.2 line-height, Signal Grey): The figlet ASCII art answer to `whoami`.
 - **Label** (400, 0.8–0.85em, Dim Text): Title-bar text, dates, card sublabels, `# comments`.
 
 ### Named Rules
-**The Flat Scale Rule.** Hierarchy is expressed through color (Signal Grey vs Output Text vs Dim) and weight (600 vs 400), never through font-size jumps. A heading larger than ~1.05em breaks the terminal's reality.
+**The Flat Scale Rule (amended).** Hierarchy is expressed through color (Headline White vs Signal Grey vs Output Text vs Dim) and weight (700/600 vs 400), with exactly **one** sanctioned size jump: the five section headings at ~1.25–1.45rem. Big bold section headers are genuine terminal output (man pages, `gh`/`npm` CLI headers) — a louder voice, not a different one. Everything else stays flat; a second size tier breaks the terminal's reality.
 
 **The Plausible Shell Rule.** Every prompt line must be a command that would actually run: real flags, real syntax, `#` for comments, `>` for log notes. Invented pseudo-commands read as cosplay.
 
@@ -150,9 +164,14 @@ Interactive elements are quiet until touched: flat and understated at rest, answ
 - **Corner Style:** Softly squared (8px radius; 6px under 720px).
 - **Border:** 1px Border (#2a2a2a); max-width 1400px, centered.
 
+### Section Headings
+- **Structure:** A plain-English heading (`About`, `Experience`, `Projects`, `Activities`, `Films`) in Headline White at the page's one size jump, weight 700, as the real `<h1>`/`<h2>` — the accessible and visual structure match, no sr-only doubling. The section's prompt line sits directly beneath it, demoted (see Prompt Lines) and `aria-hidden`.
+- **Rhythm:** Heading, demoted command, then output form one tight group; the 3.5rem gap stays between sections, so each section scans as a single unit.
+- **No scaffolding:** No ruled underlines, no eyebrows, no numbering — the size jump and the dim command beneath carry the structure alone.
+
 ### Prompt Lines
-- **Structure:** `~ $ ` in Prompt Green + command in Output Text at 600 weight; hanging indent (4ch) for wrapped lines.
-- **Motion:** Commands type themselves on scroll into view (0.8s, `steps(var(--n))`), gated behind `.typing-enabled` so the no-JS page shows everything instantly; disabled under reduced motion and below 720px.
+- **Structure:** `~ $ ` in Prompt Green + command in Output Text at 600 weight; hanging indent (4ch) for wrapped lines. **Demoted variant** (under a section heading): 0.85em, prompt keeps Prompt Green, command drops to Dim at 400 weight.
+- **Motion:** None — commands are static, already-run output. The typing animation was removed (it pulled attention from the content); the blinking cursor at the session's end is the page's only idle motion.
 
 ### GUI Cards ("GUI output")
 - **Corner Style:** Gently squared (6px radius).
@@ -185,8 +204,8 @@ Interactive elements are quiet until touched: flat and understated at rest, answ
 
 ### Do:
 - **Do** keep every shell detail plausible — real commands, real flags, `#` comments, `>` notes. The Plausible Shell Rule is the brand.
-- **Do** express hierarchy with color and weight only; body stays 0.95–1rem, titles cap at 1.05em.
-- **Do** keep Prompt Green (#7ce38b) exclusively for interactive/shell elements and Signal Grey (#eae6de) exclusively for highlighted output.
+- **Do** express hierarchy with color and weight, plus the one sanctioned size jump for section headings; body stays 0.95–1rem, titles cap at 1.1em.
+- **Do** keep Prompt Green (#7ce38b) exclusively for interactive/shell elements and the warm off-whites (Headline White #f7f3ea, Signal Grey #eae6de) exclusively for highlighted output.
 - **Do** define every color once in `index.css` custom properties.
 - **Do** ship every animation with a `prefers-reduced-motion: reduce` fallback and keep the page fully readable with JavaScript disabled.
 - **Do** design mobile first-class: the card grid collapses to one column, shields shrink, the window keeps slim padding under 720px. The viewport is part of the design.
@@ -198,5 +217,5 @@ Interactive elements are quiet until touched: flat and understated at rest, answ
 - **Don't** use stark #ffffff for text: highlights are warm off-white (#eae6de); pure white reads harsh against the softer terminal palette.
 - **Don't** reach for design-agency flash: no WebGL, no huge display type, no scroll-jacking, no font beyond the monospace stack.
 - **Don't** add a second resting shadow inside the terminal (The One Window Rule) or a third chromatic UI color (The Two Voices Rule).
-- **Don't** use font-size jumps for hierarchy — if a heading is bigger than 1.05em, it has left the terminal.
-- **Don't** gate content visibility on animation; the typing effect must enhance text that is already present in the DOM.
+- **Don't** add a second size tier — the section headings own the page's only size jump; any other text bigger than 1.1em has left the terminal.
+- **Don't** gate content visibility on animation; any future motion must enhance text that is already present in the DOM.

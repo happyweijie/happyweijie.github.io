@@ -2,35 +2,6 @@
 (function () {
   "use strict";
 
-  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var hasObserver = "IntersectionObserver" in window;
-
-  // Commands type themselves as they scroll into view. The hide-then-type CSS
-  // is gated on this class, so without JS every command is visible instantly.
-  if (!reducedMotion && hasObserver) {
-    document.documentElement.classList.add("typing-enabled");
-
-    var cmds = Array.prototype.slice.call(document.querySelectorAll(".cmd[data-type]"));
-    cmds.forEach(function (el) {
-      el.style.setProperty("--n", el.textContent.length);
-    });
-
-    var typeObserver = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("typed");
-            typeObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { rootMargin: "0px 0px -10% 0px" }
-    );
-    cmds.forEach(function (el) {
-      typeObserver.observe(el);
-    });
-  }
-
   // Both navs (wide-screen sidebar, narrow-screen status line) highlight
   // whichever section is in view. A plain scroll handler (not
   // IntersectionObserver) so the last section still wins when the page

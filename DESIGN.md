@@ -174,6 +174,7 @@ Interactive elements are quiet until touched: flat and understated at rest, answ
 - **Motion:** None — commands are static, already-run output. The typing animation was removed (it pulled attention from the content); the blinking cursor at the session's end is the page's only idle motion.
 
 ### GUI Cards ("GUI output")
+- **Every card links to proof** (repo, live app, post, or video) — an unlinked card is a spec violation ("evidence over adjectives"). A dim `↗` after the title marks the link at rest; it turns Prompt Green with the title on hover/focus/active, and on hover/focus it nudges 0.12em along its own direction (up-right) — the glyph travels the way it points, echoing the card lift. Implemented with relative offsets, not transform (transforms don't apply to inline boxes, and inline-block would let the arrow wrap alone); suppressed under reduced motion, where the color step alone carries the feedback. The arrow is CSS `content` with empty alt-text so screen readers skip it.
 - **Corner Style:** Gently squared (6px radius).
 - **Background:** Card Black (#101010), stepping to #131313 on hover.
 - **Border:** 1px Border at rest; Prompt Green on hover/focus.
@@ -197,6 +198,12 @@ Interactive elements are quiet until touched: flat and understated at rest, answ
 
 ### The Experience Graph (signature component)
 - The experience log renders as a downward DAG with drawn node/edge elements, all in a single stroke color (Dim): each role is a solid graph vertex (1.25rem disc, Border-grey fill, 4px ring) centered on its first line, and a 3px stem runs beside the entry into a small arrowhead (9×6px, continuous with the stem) landing on the next node — `○──▶ ○──▶ ○` turned vertical. Stems meet the rings flush at their tangent points, never crossing inside (pseudo-elements need explicit `box-sizing: border-box`; the `*` reset doesn't reach them). Text keeps 2.5rem clearance from the rail. Built from empty CSS pseudo-elements; rem-sized so the graph scales with the fluid root. Newest role sits at the top; the arrows read "built on".
+
+### The Contact Coda (peak-end closer)
+- **Structure:** The session's final exchange before the idle prompt: `~ $ cat contact.txt` (demoted prompt) printing a plausible key/value file — `status:` / `email:` / `linkedin:` / `github:` — with keys in Dim (aligned via 10ch column) and values as native Prompt Green text links (underlined, 1px, 0.2em offset). A `#` comment signs off, then the blinking prompt idles 2rem below.
+- **Narrow screens (<720px):** the side-by-side column can't hold — wrapped values would dangle back at column 0 — so each value stacks under its key at a 2ch indent (every value line aligns there), with 0.6rem between pairs. The block-level links double as full-width touch targets.
+- **Purpose:** Ends the page with the ask (peak-end rule) and gives the contact path a native fallback that survives blocked badge CDNs; the top badge row stays as the GitHub-culture voice.
+- **Hover:** Links answer with the shield row's brightness step (`brightness(1.15)`), staying in green's interactive voice.
 
 ### Focus
 - **All interactive elements:** 2px solid Prompt Green outline, 2px offset, via `:focus-visible`.

@@ -580,6 +580,50 @@ a.gui-card:active .gui-title {
   transition: color 0.2s ease;
 }
 
+/* every card links to proof; the dim ↗ says so at rest — recruiters
+   read before they hover. It joins the title's green on interaction.
+   (The content alt-text syntax keeps screen readers from announcing
+   the arrow; older browsers fall back to the plain declaration.) */
+.gui-title::after {
+  /* no-break space so the arrow never wraps to a line of its own */
+  content: "\00a0\2197";
+  content: "\00a0\2197" / "";
+  color: var(--dim);
+  /* relative offsets, not transform: transforms don't apply to inline
+     boxes, and inline-block would break the no-break glue above. The
+     hover nudge travels the way the glyph points. */
+  position: relative;
+  top: 0;
+  left: 0;
+  transition: color 0.2s ease, top 0.2s ease, left 0.2s ease;
+}
+
+@media (hover: hover) {
+  a.gui-card:hover .gui-title::after {
+    color: var(--green);
+    top: -0.12em;
+    left: 0.12em;
+  }
+}
+
+a.gui-card:focus-visible .gui-title::after {
+  color: var(--green);
+  top: -0.12em;
+  left: 0.12em;
+}
+
+a.gui-card:active .gui-title::after {
+  color: var(--green);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a.gui-card:hover .gui-title::after,
+  a.gui-card:focus-visible .gui-title::after {
+    top: 0;
+    left: 0; /* the color step alone carries the feedback */
+  }
+}
+
 .gui-sub {
   margin: 0 0 0.3rem;
   color: var(--dim);
@@ -595,9 +639,73 @@ a.gui-card:active .gui-title {
   height: 1.6rem;
 }
 
+/* ---- contact coda ----
+   The session ends the way real ones do: `cat contact.txt` prints the
+   ask, a comment signs off, and the prompt idles. The key/value links
+   are native text, so the contact path survives blocked badge CDNs. */
+
+.coda {
+  margin-top: 3.5rem;
+}
+
+/* a real `cat` prints contiguous lines — tighter than paragraph rhythm */
+.out .contact-line {
+  margin-bottom: 0.2rem;
+  overflow-wrap: anywhere; /* long profile URLs on narrow screens */
+}
+
+.contact-key {
+  display: inline-block;
+  min-width: 10ch; /* longest key is "linkedin:" — values align as one column */
+  color: var(--dim);
+}
+
+.contact-line a {
+  color: var(--green);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: filter 0.2s ease;
+}
+
+/* same hover language as the linked shields: a brightness step, so the
+   link stays in green's interactive voice; :active carries the touch
+   equivalent, as on the cards */
+@media (hover: hover) {
+  .contact-line a:hover {
+    filter: brightness(1.15);
+  }
+}
+
+.contact-line a:active {
+  filter: brightness(1.15);
+}
+
+.prompt-end {
+  margin-top: 2rem;
+}
+
 /* ---- responsive ---- */
 
 @media (max-width: 720px) {
+  /* narrow screens: the key/value column can't hold — wrapped values
+     dangled back at column 0 and sheared the column apart. Stack the
+     value under its key instead; every value line aligns at 2ch. The
+     block links also become full-width touch targets. */
+  .contact-key {
+    display: block;
+    min-width: 0;
+  }
+
+  .contact-val {
+    display: block;
+    padding-left: 2ch;
+  }
+
+  .out .contact-line {
+    margin-bottom: 0.6rem;
+  }
+
   body {
     padding: 0.5rem;
     padding-bottom: calc(3.5rem + env(safe-area-inset-bottom));
